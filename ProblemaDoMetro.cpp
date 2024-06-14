@@ -1,18 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h> // Necessário para a função system()
+#include <stdlib.h>
+#include <string.h>
+#include "Configuracoes.h"
+#include "EstruturasDeDados.cpp"
 
-void printMatriz(float matriz[14][14])
-{
-    for (int i = 0; i < 14; i++)
-    {
-        for (int j = 0; j < 14; j++)
-        {
+void printMatriz(float matriz[14][14]) {
+    for (int i = 0; i < 14; i++) {
+        for (int j = 0; j < 14; j++) {
             printf("%6.1f ", matriz[i][j]);
         }
         printf("\n");
     }
-    return;
-}
+};
 
 int main()
 {
@@ -69,7 +68,24 @@ int main()
     printf("\n\n\n");
     printMatriz(distancia_real);
 
-    // Pausa o sistema para manter a janela aberta
+    node myNode;
+    createNode(&myNode, "Node1", 10.0, 5.0, 3.0, NULL);
+
+    free(myNode.name); 
+
+    node_list minha_lista;
+    inicializar_lista(&minha_lista);
+
+    adicionar_nodo(&minha_lista, "Node1", 10.0, 5.0, 3.0, NULL);
+    adicionar_nodo(&minha_lista, "Node2", 8.0, 4.0, 2.0, &minha_lista.elements[0]);
+
+    apresentar_nodo(&minha_lista.elements[0]);
+    apresentar_nodo(minha_lista.elements[0].father);
+
+    apresentar_lista(&minha_lista);
+
+    liberar_lista(&minha_lista);
+
     system("pause");
 
     return 0;
