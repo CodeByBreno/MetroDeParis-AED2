@@ -219,9 +219,9 @@ while running:
             pygame.draw.line(screen, (255, 0, 0), start_coord, end_coord, 15)
 
     # Desenha a posição do mouse relativa à imagem na tela
-    font = pygame.font.Font(None, 36)
-    text = font.render(f'Mouse: {mouse_pos}', True, font_color)
-    screen.blit(text, (10, 10))
+    # font = pygame.font.Font(None, 36)
+    # text = font.render(f'Mouse: {mouse_pos}', True, font_color)
+    # screen.blit(text, (10, 10))
 
     for i, coord in enumerate(coordenadas):
         # Define a cor do círculo com base no estado de clique
