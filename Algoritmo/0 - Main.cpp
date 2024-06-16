@@ -94,6 +94,11 @@ int main()
     printf("Distancia direta de %s para %s: %.2f\n", nodo3->father->name, nodo3->name, h2);
     printf("Distancia direta de %s para %s: %.2f\n", nodo5->father->name, nodo5->name, h3);
 
+    // Testa das matrizes diagonais
+    printf("\nTeste das matrizes (diagonalidade): \n");
+    testa_matriz_diagonal(distancia_direta);
+    testa_matriz_diagonal(distancia_real);
+
     system("pause");
 
     return 0;

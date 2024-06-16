@@ -43,3 +43,14 @@ int numero_estacao(const char *name)
 
     return c;
 }
+
+int testa_matriz_diagonal(float matriz[14][14]){
+    for (int i = 0; i < 14; i++){
+        for(int j = 0; j < 14; j++){
+            if (matriz[i][j] != matriz[j][i]){
+                printf("Nao eh simetrica pela diagonal. Erro em (%d, %d): %.2f\n", i, j, matriz[i][j]);
+            }
+        }
+    }
+    printf("Eh simetrica pela diagonal\n");
+}
