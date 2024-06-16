@@ -107,7 +107,6 @@ button_text_color = (255, 255, 255)
 metro_path_coordenadas = []
 executed = False
 
-
 def clear_selection():
     global clicked_states, clicked_circles
     clicked_states = [False] * len(coordenadas)
@@ -142,7 +141,7 @@ def get_coordenadas(metro_path):
 # Função a ser chamada quando o botão for clicado
 def button_function(clicked_circles):
     if platform.system() == 'Windows':
-        exe_path = "./algorithm.exe"
+        exe_path = "output/teste.exe"
     elif platform.system() == 'Linux':
         exe_path = "./algorithm"
     else:
