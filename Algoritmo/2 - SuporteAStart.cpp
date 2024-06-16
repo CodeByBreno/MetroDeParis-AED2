@@ -37,12 +37,15 @@ float calc_heuristica(node* nodo){
         exit(3);
     }
 
-    char* estacao_atual = (char *) malloc(sizeof(char)*strlen(nodo->name));
+    char* estacao_atual = (char *) malloc(sizeof(char)*(strlen(nodo->name) + 1));
     strcpy(estacao_atual, nodo->name);
     
-    char* estacao_anterior = (char *) malloc(sizeof(char)*strlen(nodo->father->name));
+    char* estacao_anterior = (char *) malloc(sizeof(char)*(strlen(nodo->father->name) + 1));
     strcpy(estacao_anterior, nodo->father->name);
 
-    
+    int numero_estacao_atual = numero_estacao(estacao_atual) - 1;
+    int numero_estacao_anterior = numero_estacao(estacao_anterior) - 1;
 
+    float heuristic = distancia_direta[numero_estacao_atual][numero_estacao_anterior];
+    return heuristic;
 }
