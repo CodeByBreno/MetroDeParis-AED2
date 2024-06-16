@@ -116,9 +116,11 @@ node *obter_nodo(node_list *lista, int i)
 void apresentar_lista(node_list *lista)
 {
     node *atual = lista->head;
+    int i = 0;
     while (atual != NULL)
     {
-        printf("Nome: %s | F(n): %.2f | h(n): %.2f | d(n): %.2f | Father_name: %s\n",
+        printf("%d - Nome: %s | F(n): %.2f | h(n): %.2f | d(n): %.2f | Father_name: %s\n",
+               i++,
                atual->name,
                atual->function,
                atual->heuristic,

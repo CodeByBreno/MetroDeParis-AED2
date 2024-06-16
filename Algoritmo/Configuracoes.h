@@ -1,6 +1,8 @@
 #ifndef CONFIGURACOES_H
 #define CONFIGURACOES_H
 
+char initial_station[4];
+char final_station[4] = "E12";
 typedef struct node {
     char* name;          // Nome do nó
     float function;      // Valor da função f(n)
@@ -23,6 +25,13 @@ void apresentar_lista(node_list *lista);
 void remover_nodo(node_list *entrada, node *nodo);
 node* obter_nodo(node_list * lista, int i);
 void apresentar_nodo(node *nodo);
+
+// Funções de Suporte para o AStar
+node* maior_nodo(node_list * lista);
+
+// Funções secundárias auxiliares
+int valid_name(const char *name);
+int numero_estacao(const char *name);
 
 // Matrizes do problema
 float distancia_direta[14][14] = {

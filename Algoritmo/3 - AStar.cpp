@@ -1,7 +1,7 @@
 #include "Configuracoes.h"
 #include "1 - EstruturasDeDados.cpp"
 
-void aStar(){
+void a_star(){
     node_list fronteira;
     node_list visitados;
     inicializar_lista(&fronteira);
