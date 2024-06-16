@@ -34,18 +34,49 @@ float calc_heuristica(node* nodo){
     if (nodo == NULL || nodo->father == NULL){
         printf("Erro: A heuristica não pode ser calculada para um nodo sem pai");
         system("pause");
-        exit(3);
+        exit(2);
     }
 
     char* estacao_atual = (char *) malloc(sizeof(char)*(strlen(nodo->name) + 1));
     strcpy(estacao_atual, nodo->name);
-    
+
     char* estacao_anterior = (char *) malloc(sizeof(char)*(strlen(nodo->father->name) + 1));
     strcpy(estacao_anterior, nodo->father->name);
 
     int numero_estacao_atual = numero_estacao(estacao_atual) - 1;
     int numero_estacao_anterior = numero_estacao(estacao_anterior) - 1;
 
-    float heuristic = distancia_direta[numero_estacao_atual][numero_estacao_anterior];
-    return heuristic;
+    float real_distance = distancia_direta[numero_estacao_atual][numero_estacao_anterior];
+    return real_distance/train_speed;
+}
+
+float calc_travel_time(node* nodo){
+    if (nodo == NULL || nodo->father == NULL){
+        printf("Erro: A heuristica não pode ser calculada para um nodo sem pai");
+        system("pause");
+        exit(2);
+    }
+
+    char* estacao_atual = (char *) malloc(sizeof(char)*(strlen(nodo->name) + 1));
+    strcpy(estacao_atual, nodo->name);
+
+    char* estacao_anterior = (char *) malloc(sizeof(char)*(strlen(nodo->father->name) + 1));
+    strcpy(estacao_anterior, nodo->father->name);
+
+    int numero_estacao_atual = numero_estacao(estacao_atual) - 1;
+    int numero_estacao_anterior = numero_estacao(estacao_anterior) - 1;
+
+    float distance = distancia_real[numero_estacao_atual][numero_estacao_anterior];
+
+    if (distance == 0){
+        printf("Erro: Nao existe conexao entre essas duas estacoes\n");
+        system("pause");
+        exit(2);
+    }
+
+    return distance/train_speed;
+}
+
+void buscar_nodos_adjacentes(nodo* best_node, node_list* lista){
+
 }

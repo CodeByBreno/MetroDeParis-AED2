@@ -11,13 +11,13 @@ void inicializar_lista(node_list *lista)
 }
 
 // Função para adicionar um nó
-node *adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float distance, node *father)
+node *adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float travel_time, node *father)
 {
     node *new_node = (node *)malloc(sizeof(node));
     new_node->name = strdup(name);
     new_node->function = function;
     new_node->heuristic = heuristic;
-    new_node->distance = distance;
+    new_node->travel_time = travel_time;
     new_node->father = father;
 
     if (lista->size == 0)
@@ -38,6 +38,11 @@ node *adicionar_nodo(node_list *lista, const char *name, float function, float h
     lista->size++;
 
     return new_node;
+}
+
+node * adicionar_nodo_automaticamente(node_list * lista, node * nodo){
+    node* newNode = adicionar_nodo(lista, nodo->name, nodo->function, nodo->heuristic, nodo->travel_time, nodo->father);
+    return newNode;
 }
 
 // Função para liberar a lista
@@ -68,7 +73,7 @@ void remover_nodo(node_list *lista, node *nodo)
     {
         printf("Erro: Lista Vazia");
         system("pause");
-        exit(2);
+        exit(1);
     }
 
     node* atual = lista->head;
@@ -101,7 +106,7 @@ node *obter_nodo(node_list *lista, int i)
     {
         printf("Erro: Busca por nodo em posição inexistente na lista\n");
         system("pause");
-        exit(2);
+        exit(1);
     }
 
     while (i > 0)
@@ -124,7 +129,7 @@ void apresentar_lista(node_list *lista)
                atual->name,
                atual->function,
                atual->heuristic,
-               atual->distance,
+               atual->travel_time,
                atual->father ? atual->father->name : "NULL");
         atual = atual->next;
     }
@@ -143,14 +148,14 @@ void apresentar_nodo(node *nodo)
            nodo->name,
            nodo->function,
            nodo->heuristic,
-           nodo->distance,
+           nodo->travel_time,
            nodo->father ? nodo->father->name : "NULL");
 }
 
 void adicionar_lista(node_list* lista_recebe, node_list* lista_envia){
     node* aux = lista_envia->head;
     while(aux != NULL){
-        adicionar_nodo(lista_recebe, aux->name, aux->function, aux->heuristic, aux->distance, aux->father);
+        adicionar_nodo(lista_recebe, aux->name, aux->function, aux->heuristic, aux->travel_time, aux->father);
         aux = aux->next;
     }
 }

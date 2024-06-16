@@ -31,9 +31,9 @@ int main()
 
     node *nodo1 = adicionar_nodo(&minha_lista, "E1", 10.0, 5.0, 3.0, NULL);
     node *nodo2 = adicionar_nodo(&minha_lista, "E2", 45.0, 5.0, 3.0, nodo1);
-    node *nodo3 = adicionar_nodo(&minha_lista, "E7", 30.0, 5.0, 3.0, nodo2);
-    node *nodo4 = adicionar_nodo(&minha_lista, "E13", 14.0, 5.0, 3.0, nodo3);
-    node *nodo5 = adicionar_nodo(&minha_lista, "E6", 14.0, 5.0, 3.0, nodo4);
+    node *nodo3 = adicionar_nodo(&minha_lista, "E3", 30.0, 5.0, 3.0, nodo2);
+    node *nodo4 = adicionar_nodo(&minha_lista, "E9", 14.0, 5.0, 3.0, nodo2);
+    node *nodo5 = adicionar_nodo(&minha_lista, "E10", 14.0, 5.0, 3.0, nodo2);
 
     printf("Lista inicial:\n");
     apresentar_lista(&minha_lista);
@@ -98,6 +98,32 @@ int main()
     printf("\nTeste das matrizes (diagonalidade): \n");
     testa_matriz_diagonal(distancia_direta);
     testa_matriz_diagonal(distancia_real);
+
+    // Teste do calculo da distancia direta
+    printf("\nTestando obter o tempo real: \n");
+    float d1 = calc_travel_time(nodo2);
+    float d2 = calc_travel_time(nodo3);
+    float d3 = calc_travel_time(nodo5);
+
+    printf("Distancia real de %s para %s: %.2f\n", nodo2->father->name, nodo2->name, d1);
+    printf("Distancia real de %s para %s: %.2f\n", nodo3->father->name, nodo3->name, d2);
+    printf("Distancia real de %s para %s: %.2f\n", nodo5->father->name, nodo5->name, d3);
+
+    // Teste de adicionar nodo automaticamente
+    printf("\nTestando adicionar nodo automaticamente: \n");
+    adicionar_nodo_automaticamente(&minha_lista, nodo1);
+    apresentar_lista(&minha_lista);
+
+    // Testando se de fato está sendo criada uma copia do nodo ao adicionar
+    printf("\nTestando se de fato esta sendo criada uma copia do nodo ao adicionar:\n");
+    node_list novissima_lista;
+    inicializar_lista(&novissima_lista);
+    node *nodo8 = adicionar_nodo(&novissima_lista, "E8", 14.0, 5.0, 3.0, nodo2);
+
+    adicionar_nodo_automaticamente(&minha_lista, nodo8);
+
+    liberar_lista(&novissima_lista);
+    apresentar_lista(&minha_lista);
 
     system("pause");
 

@@ -7,7 +7,7 @@ typedef struct node {
     char* name;          // Nome do nó
     float function;      // Valor da função f(n)
     float heuristic;     // Valor da heurística h(n)
-    float distance;      // Distância g(n)
+    float travel_time;      // Distância g(n)
     struct node* father; // Ponteiro para o nó pai
     struct node* next;  // Próximo nodo da lista ligada
 } node;
@@ -19,7 +19,7 @@ typedef struct {
 
 // Estruturas de Dados
 void inicializar_lista(node_list *lista) ;
-node* adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float distance, node *father);
+node* adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float travel_time, node *father);
 void liberar_lista(node_list *lista);
 void apresentar_lista(node_list *lista);
 void remover_nodo(node_list *entrada, node *nodo);
@@ -28,13 +28,20 @@ void apresentar_nodo(node *nodo);
 
 // Funções de Suporte para o AStar
 node* maior_nodo(node_list * lista);
+int eh_nodo_objetivo(node *nodo);
+float calc_heuristica(node* nodo);
+float calc_travel_time(node* nodo);
+void buscar_nodos_adjacentes(nodo* best_node, node_list* lista);
 
 // Funções secundárias auxiliares
 int valid_name(const char *name);
 int numero_estacao(const char *name);
 int testa_matriz_diagonal(float ** matriz, int n, int m);
 
-// Matrizes do problema
+// Dados do problema
+float train_speed = 8.33; // Velocidade em m/s (30km/h)
+float change_line_time = 4.0;
+
 float distancia_direta[14][14] = {
     {0, 10, 18.5, 24.8, 36.4, 38.8, 35.8, 25.4, 17.6, 9.1, 16.7, 27.3, 27.6, 29.8},
     {10, 0, 8.5, 14.8, 26.6, 29.1, 26.1, 17.3, 10, 3.5, 15.5, 20.9, 19.1, 21.8},
