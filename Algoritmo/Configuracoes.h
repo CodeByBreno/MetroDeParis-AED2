@@ -58,6 +58,10 @@ int numero_estacao(const char *name);
 int testa_matriz_diagonal(float matriz[14][14]);
 const char* nome_estacao(int i);
 
+// Funcoes A*
+resposta * a_star();
+resposta * DEBUG_a_star();
+
 // Dados do problema
 float train_speed = 8.33; // Velocidade em m/s (30km/h)
 float change_line_time = 4.0;

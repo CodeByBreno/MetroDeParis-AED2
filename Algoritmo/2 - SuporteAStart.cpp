@@ -40,7 +40,7 @@ float calc_heuristica(node *nodo)
     {
         printf("Erro: A heuristica não pode ser calculada para um nodo sem pai\n");
         system("pause");
-        exit(2);
+        exit(10);
     }
 
     char *estacao_atual = (char *)malloc(sizeof(char) * (strlen(nodo->name) + 1));
@@ -62,7 +62,7 @@ float calc_travel_time(node *nodo)
     {
         printf("Erro: A heuristica não pode ser calculada para um nodo sem pai");
         system("pause");
-        exit(2);
+        exit(11);
     }
 
     char *estacao_atual = (char *)malloc(sizeof(char) * (strlen(nodo->name) + 1));
@@ -80,7 +80,7 @@ float calc_travel_time(node *nodo)
     {
         printf("Erro: Nao existe conexao entre essas duas estacoes\n");
         system("pause");
-        exit(2);
+        exit(12);
     }
 
     return distance / train_speed;
@@ -92,7 +92,7 @@ void buscar_nodos_adjacentes(node *best_node, node_list *lista)
     {
         printf("Erro: Dados nulos");
         system("pause");
-        exit(2);
+        exit(13);
     }
 
     char *estacao = (char *)malloc(sizeof(char) * (strlen(best_node->name) + 1));
@@ -137,7 +137,7 @@ resposta *gerar_resposta(node *nodo)
     if (nodo == NULL) {
         printf("Erro: Nodo nulo");
         system("pause");
-        exit(3);
+        exit(14);
     }
 
     // Primeiro passo: determinar o tamanho total necessário
@@ -154,12 +154,12 @@ resposta *gerar_resposta(node *nodo)
     resposta *result = (resposta *)malloc(sizeof(resposta));
     if (result == NULL) {
         printf("Erro: Falha ao alocar memória para resultado\n");
-        exit(1);
+        exit(15);
     }
     result->caminho = (char *)malloc(sizeof(char) * (total_length + 1)); // +1 para o terminador nulo
     if (result->caminho == NULL) {
         printf("Erro: Falha ao alocar memória para caminho\n");
-        exit(1);
+        exit(16);
     }
     result->caminho[0] = '\0'; // Inicializa a string vazia
 
@@ -172,12 +172,12 @@ resposta *gerar_resposta(node *nodo)
         lista_caminho = (char **)realloc(lista_caminho, sizeof(char*) * (counter + 1));
         if (lista_caminho == NULL) {
             printf("Erro: Falha ao realocar lista_caminho\n");
-            exit(1);
+            exit(17);
         }
         lista_caminho[counter] = (char *)malloc(sizeof(char) * (strlen(aux->name) + 1));
         if (lista_caminho[counter] == NULL) {
             printf("Erro: Falha ao alocar memória para lista_caminho[%d]\n", counter);
-            exit(1);
+            exit(18);
         }
         strcpy(lista_caminho[counter], aux->name);
         counter++;

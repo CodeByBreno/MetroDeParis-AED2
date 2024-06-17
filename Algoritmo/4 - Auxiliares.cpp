@@ -42,7 +42,7 @@ int numero_estacao(const char *name)
     if (valid_name(name) == 0){
         printf("Erro: Nome da estacao invalido\n");
         system("pause");
-        exit(4);
+        exit(23);
     }
 
     for (int i = 0; i < 14; i++)

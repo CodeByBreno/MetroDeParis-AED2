@@ -32,7 +32,7 @@ node *adicionar_nodo(node_list *lista, const char *name, float function, float h
     if (name == NULL){
         printf("Erro: Adicionando Nodo com nome nulo\n");
         system("pause");
-        exit(1);
+        exit(2);
     }
     new_node->name = strdup(name);
     new_node->function = function;
@@ -64,7 +64,7 @@ node * adicionar_nodo_automaticamente(node_list * lista, node * nodo){
     if (contem_nodo(lista, nodo)){
         printf("Erro: Nodo ja contido na lista (outro nodo de mesmo nome esta presente)\n");
         system("pause");
-        exit(1);
+        exit(3);
     }
 
     node* newNode = adicionar_nodo(lista, nodo->name, nodo->function, nodo->heuristic, nodo->travel_time, nodo->father);
@@ -92,14 +92,14 @@ void remover_nodo(node_list *lista, node *nodo)
     {
         printf("Erro: Lista Inexistente\n");
         system("pause");
-        exit(1);
+        exit(4);
     }
 
     if (lista->head == NULL)
     {
         printf("Erro: Lista Vazia\n");
         system("pause");
-        exit(1);
+        exit(5);
     }
 
     node* atual = lista->head;
@@ -109,7 +109,7 @@ void remover_nodo(node_list *lista, node *nodo)
         if (atual->father == nodo) {
             printf("Erro: O nodo nao pode ser removido porque existem outros relacionados a ele\n");
             system("pause");
-            exit(1);
+            exit(6);
         }
         anterior = atual;
         atual = atual->next;
@@ -134,7 +134,7 @@ node *obter_nodo(node_list *lista, int i)
     {
         printf("Erro: Busca por nodo em posição inexistente na lista\n");
         system("pause");
-        exit(1);
+        exit(7);
     }
 
     while (i > 0)
@@ -224,7 +224,7 @@ int contem_nodo(node_list * lista, node * nodo){
         if (aux->name == NULL){
             printf("Erro: Nodo com nome nulo\n");
             system("pause");
-            exit(1);
+            exit(8);
         }
 
         if (strcmp(aux->name, nodo->name) == 0){
@@ -247,5 +247,5 @@ node * obter_nodo_pelo_nome(node_list * lista, char * nome){
     
     printf("Erro: Busca por nodo com nome inexistente na lista\n");
     system("pause");
-    exit(1);
+    exit(9);
 }

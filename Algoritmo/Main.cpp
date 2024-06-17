@@ -19,9 +19,7 @@ int main(int argc, char *argv[]) {
     final_station = argv[2];
 
     resposta * resultado = a_star();
-
     printf("%s", resultado->caminho);
-
-    system("pause");
+    
     return 0;
 }
