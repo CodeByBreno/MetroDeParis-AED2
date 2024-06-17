@@ -5,19 +5,8 @@
 #include "Configuracoes.h"
 #include "1 - EstruturasDeDados.cpp"
 #include "2 - SuporteAStart.cpp"
+#include "3 - AStar.cpp"
 #include "4 - Auxiliares.cpp"
-
-void printMatriz(float matriz[14][14])
-{
-    for (int i = 0; i < 14; i++)
-    {
-        for (int j = 0; j < 14; j++)
-        {
-            printf("%6.1f ", matriz[i][j]);
-        }
-        printf("\n");
-    }
-};
 
 int main()
 {
@@ -56,7 +45,7 @@ int main()
 
     // Testando localizar o melhor nodo
     printf("\nMelhor nodo:\n");
-    node *best_node = maior_nodo(&minha_lista);
+    node *best_node = melhor_nodo(&minha_lista);
     apresentar_nodo(best_node);
 
     // Testando a busca por um nodo
@@ -110,9 +99,9 @@ int main()
     printf("Distancia real de %s para %s: %.2f\n", nodo5->father->name, nodo5->name, d3);
 
     // Teste de adicionar nodo automaticamente
-    printf("\nTestando adicionar nodo automaticamente: \n");
-    adicionar_nodo_automaticamente(&minha_lista, nodo1);
-    apresentar_lista(&minha_lista);
+    // printf("\nTestando adicionar nodo automaticamente: \n");
+    // adicionar_nodo_automaticamente(&minha_lista, nodo1);
+    // apresentar_lista(&minha_lista);
 
     // Testando se de fato está sendo criada uma copia do nodo ao adicionar
     printf("\nTestando se de fato esta sendo criada uma copia do nodo ao adicionar:\n");
@@ -136,6 +125,47 @@ int main()
     inicializar_lista(&adjacentes);
     buscar_nodos_adjacentes(nodo3, &adjacentes);
     apresentar_lista(&adjacentes);
+
+    // Testando a função de contém nodo
+    node_list lista_aleatoria;
+    inicializar_lista(&lista_aleatoria);
+    node *nodo9 = adicionar_nodo(&lista_aleatoria, "E14", 14.0, 5.0, 3.0, nodo2);
+
+    printf("\nTestando funcao de contem nodo: \n");
+    printf("Eh pra ser 1: %d\n", contem_nodo(&minha_lista, nodo1));
+    printf("Eh pra ser 0: %d\n", contem_nodo(&minha_lista, nodo9));
+    printf("Eh pra ser 1: %d\n", contem_nodo(&lista_aleatoria, nodo9));
+
+    // Adicionando nodos que já existem
+    printf("\nTestando se a adicao de listas esta tratando as repeticoes:\n");
+    node_list lista_repetidos;
+    inicializar_lista(&lista_repetidos);
+    adicionar_nodo_automaticamente(&lista_repetidos, nodo1);
+    adicionar_nodo_automaticamente(&lista_repetidos, nodo4);
+    adicionar_nodo_automaticamente(&lista_repetidos, nodo9);
+    
+    printf("\nLista que sera adicionada: \n");
+    apresentar_lista(&lista_repetidos);
+    printf("\nLista alvo pre adicao:\n");
+    apresentar_lista(&minha_lista);
+    printf("\nResultado da adicao: \n");
+    adicionar_lista(&minha_lista, &lista_repetidos);
+    apresentar_lista(&minha_lista);
+
+    // Testando a geracao do caminho
+    resposta * res = gerar_resposta(nodo3);
+    printf("\nTestando gerar a resposta: \n");
+    printf("Caminho: %s\n", res->caminho);
+    printf("Tempo aproximado: %.2f\n", res->tempo_total);
+
+    // Testando o A_Star
+    printf("\n\nTestando A*: \n");
+    resposta * result = a_star();
+
+    // Apresentando a resposta
+    printf("\nResposta encontrada: \n");
+    printf("%s\n", result->caminho);
+    printf("%.2f\n", result->tempo_total);
 
     system("pause");
 

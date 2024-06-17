@@ -10,10 +10,30 @@ void inicializar_lista(node_list *lista)
     lista->size = 0;
 }
 
+node * create_node(const char *name, float function, float heuristic, float travel_time, node *father){
+    node *new_node = (node *)malloc(sizeof(node));
+    if (name == NULL){
+        printf("Erro: Adicionando Nodo com nome nulo\n");
+        system("pause");
+        exit(1);
+    }
+    new_node->name = strdup(name);
+    new_node->function = function;
+    new_node->heuristic = heuristic;
+    new_node->travel_time = travel_time;
+    new_node->father = father;
+    return new_node;
+}
+
 // Função para adicionar um nó
 node *adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float travel_time, node *father)
 {
     node *new_node = (node *)malloc(sizeof(node));
+    if (name == NULL){
+        printf("Erro: Adicionando Nodo com nome nulo\n");
+        system("pause");
+        exit(1);
+    }
     new_node->name = strdup(name);
     new_node->function = function;
     new_node->heuristic = heuristic;
@@ -41,6 +61,12 @@ node *adicionar_nodo(node_list *lista, const char *name, float function, float h
 }
 
 node * adicionar_nodo_automaticamente(node_list * lista, node * nodo){
+    if (contem_nodo(lista, nodo)){
+        printf("Erro: Nodo ja contido na lista (outro nodo de mesmo nome esta presente)\n");
+        system("pause");
+        exit(1);
+    }
+
     node* newNode = adicionar_nodo(lista, nodo->name, nodo->function, nodo->heuristic, nodo->travel_time, nodo->father);
     return newNode;
 }
@@ -64,14 +90,14 @@ void remover_nodo(node_list *lista, node *nodo)
 {
     if (lista == NULL)
     {
-        printf("Erro: Lista Inexistente");
+        printf("Erro: Lista Inexistente\n");
         system("pause");
         exit(1);
     }
 
     if (lista->head == NULL)
     {
-        printf("Erro: Lista Vazia");
+        printf("Erro: Lista Vazia\n");
         system("pause");
         exit(1);
     }
@@ -93,6 +119,8 @@ void remover_nodo(node_list *lista, node *nodo)
     } else {
         lista->head = atual->next;
     }
+
+    lista->size--;
 
     free(atual);
 }
@@ -152,10 +180,72 @@ void apresentar_nodo(node *nodo)
            nodo->father ? nodo->father->name : "NULL");
 }
 
+// Adiciona o conteúdo da segunda lista de nodos diretamente na primeira
 void adicionar_lista(node_list* lista_recebe, node_list* lista_envia){
     node* aux = lista_envia->head;
+
+    // Remove da lista de envio os nodos que já estão na lista que irá receber
+    node_list lista_envio_tratada;
+    inicializar_lista(&lista_envio_tratada);
+    while (aux != NULL){
+        if (contem_nodo(lista_recebe, aux) == 0){
+            adicionar_nodo_automaticamente(&lista_envio_tratada, aux);
+        };
+        aux = aux->next;
+    }
+
+    // Agora varro a lista tratada, adicionando todos os nodos dela à lista alvo
+    aux = lista_envio_tratada.head;
+    if (lista_envio_tratada.size == 0) {
+        return;
+    }
+
     while(aux != NULL){
         adicionar_nodo(lista_recebe, aux->name, aux->function, aux->heuristic, aux->travel_time, aux->father);
         aux = aux->next;
     }
+}
+
+// Verifica se a lista já contém um nodo de MESMO NOME que o passado
+// Se a lista ou o nodo passado forem nulos, ou se o campo name não for informado, é retornado FALSO (0)
+int contem_nodo(node_list * lista, node * nodo){
+    if (lista == NULL || 
+        nodo == NULL || 
+        nodo->name == NULL) {
+        return 0;
+    }
+
+    node * aux = lista->head;
+    if (lista->size == 0){
+        return 0;
+    }
+
+    while(aux != NULL){
+        if (aux->name == NULL){
+            printf("Erro: Nodo com nome nulo\n");
+            system("pause");
+            exit(1);
+        }
+
+        if (strcmp(aux->name, nodo->name) == 0){
+            return 1;
+        } else {
+            aux = aux->next;
+        }
+    }
+    return 0;
+}
+
+node * obter_nodo_pelo_nome(node_list * lista, char * nome){
+    node * aux = lista->head;
+    while(aux != NULL){
+        if (strcmp(aux->name, nome) == 0){
+            return aux;
+        }
+        aux = aux->next;
+    }
+    
+    printf("Erro: Busca por nodo com nome inexistente na lista\n");
+    system("pause");
+    exit(1);
 }

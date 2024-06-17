@@ -4,14 +4,14 @@
 
 #include "Configuracoes.h"
 
-node *maior_nodo(node_list *lista)
+node *melhor_nodo(node_list *lista)
 {
-    float func_max = 0;
+    float func_max = 100000;
     node *best_node;
     node *aux = lista->head;
     while (aux != NULL)
     {
-        if (aux->function > func_max)
+        if (aux->function < func_max)
         {
             func_max = aux->function;
             best_node = aux;
@@ -38,7 +38,7 @@ float calc_heuristica(node *nodo)
 {
     if (nodo == NULL || nodo->father == NULL)
     {
-        printf("Erro: A heuristica não pode ser calculada para um nodo sem pai");
+        printf("Erro: A heuristica não pode ser calculada para um nodo sem pai\n");
         system("pause");
         exit(2);
     }
@@ -110,16 +110,96 @@ void buscar_nodos_adjacentes(node *best_node, node_list *lista)
         }
     }
 
-    // "j" é o tamanho do vetor de estacoes adjacentes após a iterações acima
-    for (int i = 0; i < j; i++)
+    // Se não houve nenhum adjacente, a lista deve ter ponteiro de cabeçalho nulo
+    if (j == 0)
     {
-        adicionar_nodo(
-            lista,
-            nome_estacao(estacoes_adjacentes[i] + 1),
-            0,0,0,
-            best_node);
+        lista->head = NULL;
+    }
+    else
+    {
+        // "j" é o tamanho do vetor de estacoes adjacentes após a iterações acima
+        for (int i = 0; i < j; i++)
+        {
+            adicionar_nodo(
+                lista,
+                nome_estacao(estacoes_adjacentes[i] + 1),
+                0, 0, 0,
+                best_node);
+        }
     }
 
     free(estacao);
     return;
+}
+
+resposta *gerar_resposta(node *nodo)
+{
+    if (nodo == NULL) {
+        printf("Erro: Nodo nulo");
+        system("pause");
+        exit(3);
+    }
+
+    // Primeiro passo: determinar o tamanho total necessário
+    node *aux = nodo;
+    int total_length = 0;
+    int num_nodes = 0;
+    while (aux != NULL) {
+        total_length += strlen(aux->name) + 1; // +1 para a vírgula ou terminador nulo
+        aux = aux->father;
+        num_nodes++;
+    }
+
+    // Alocar memória para o resultado
+    resposta *result = (resposta *)malloc(sizeof(resposta));
+    if (result == NULL) {
+        printf("Erro: Falha ao alocar memória para resultado\n");
+        exit(1);
+    }
+    result->caminho = (char *)malloc(sizeof(char) * (total_length + 1)); // +1 para o terminador nulo
+    if (result->caminho == NULL) {
+        printf("Erro: Falha ao alocar memória para caminho\n");
+        exit(1);
+    }
+    result->caminho[0] = '\0'; // Inicializa a string vazia
+
+    // Segundo passo: preencher a string na ordem correta
+    char **lista_caminho = NULL;  
+    int counter = 0;
+    aux = nodo;
+
+    while (aux != NULL) {
+        lista_caminho = (char **)realloc(lista_caminho, sizeof(char*) * (counter + 1));
+        if (lista_caminho == NULL) {
+            printf("Erro: Falha ao realocar lista_caminho\n");
+            exit(1);
+        }
+        lista_caminho[counter] = (char *)malloc(sizeof(char) * (strlen(aux->name) + 1));
+        if (lista_caminho[counter] == NULL) {
+            printf("Erro: Falha ao alocar memória para lista_caminho[%d]\n", counter);
+            exit(1);
+        }
+        strcpy(lista_caminho[counter], aux->name);
+        counter++;
+        aux = aux->father;
+    }
+
+    // Imprime os elementos da lista na ordem correta
+    for (int i = counter - 1; i >= 0; i--) {
+        printf("%s%s", lista_caminho[i], (i > 0) ? "," : "");
+        strcat(result->caminho, lista_caminho[i]);
+        if (i > 0) {
+            strcat(result->caminho, ",");
+        }
+    }
+
+    result->tempo_total = nodo->travel_time;
+
+    // Libera memória alocada para lista_caminho
+    for (int i = 0; i < counter; i++) {
+        free(lista_caminho[i]);
+    }
+    free(lista_caminho);
+
+    return result;
 }
