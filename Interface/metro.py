@@ -107,6 +107,14 @@ button_text_color = (255, 255, 255)
 metro_path_coordenadas = []
 executed = False
 
+
+# Define a área de texto
+text_rect = pygame.Rect(10, altura - 50, largura - 20, 40)
+font = pygame.font.Font(None, 36)
+
+# Mensagem inicial
+message = ""
+
 def clear_selection():
     global clicked_states, clicked_circles
     clicked_states = [False] * len(coordenadas)
@@ -114,9 +122,12 @@ def clear_selection():
     global executed
     executed = False
 
+    global message
+    message = ""
+
     # Limpa as coordenadas das linhas
     metro_path_coordenadas.clear()
-    print("Seleção limpa.")
+    print("Seleção limpa")
 
 def get_coordenadas(metro_path):
     global metro_path_coordenadas
@@ -141,7 +152,7 @@ def get_coordenadas(metro_path):
 # Função a ser chamada quando o botão for clicado
 def button_function(clicked_circles):
     if platform.system() == 'Windows':
-        exe_path = "../Algoritmo/output/Main.exe"
+        exe_path = "./Algoritmo/output/Main.exe"
     elif platform.system() == 'Linux':
         exe_path = "./Algoritmo/output/Main"
     else:
@@ -167,6 +178,7 @@ def button_function(clicked_circles):
         metro_path = result.stdout.split(',')
         print("Saída:", metro_path)
     except subprocess.CalledProcessError as e:
+        global message  
         if(e.returncode == 19):
             message = f"Não existe rota entre as estações {args}!"
             print(message)
@@ -219,6 +231,29 @@ while running:
 
     # Desenha a imagem de fundo
     screen.blit(background, (0, 0))
+
+    # # Desenhar a área de texto
+    # # Cor de fundo da área de texto
+    pygame.draw.rect(screen, (220, 220, 220), text_rect)  
+
+    # # Renderizar e posicionar a mensagem
+    # # Cor da mensagem
+    # text = font.render(message, True, (0, 0, 0))
+    # screen.blit(text, text_rect)
+
+    # Obter as dimensões da tela e do texto
+    screen_width = pygame.display.get_surface().get_width()
+    screen_height = pygame.display.get_surface().get_height()
+    text_surface = font.render(message, True, (0, 0, 0))  # Cor da mensagem
+    text_width = text_surface.get_width()
+    text_height = text_surface.get_height()
+
+    # Calcular a posição centralizada
+    x = (screen_width - text_width) // 2
+    y = (screen_height - 45)
+
+    # Desenhar o texto na posição centralizada
+    screen.blit(text_surface, (x, y))
 
     # Desenha o caminho
     if executed:
