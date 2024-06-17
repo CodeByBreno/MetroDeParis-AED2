@@ -203,3 +203,9 @@ resposta *gerar_resposta(node *nodo)
 
     return result;
 }
+
+int tem_baldeacao(node * inicio, node * fim){
+    if (inicio == NULL || fim == NULL || inicio->father == NULL || fim->father != inicio){
+        
+    }
+}
