@@ -125,6 +125,18 @@ int main()
     liberar_lista(&novissima_lista);
     apresentar_lista(&minha_lista);
 
+    // Testando funcao de gerar o nome da estacao
+    printf("\nTestando funcao de gerar o nome da estacao:\n");
+    printf("1 : %s\n", nome_estacao(1));
+    printf("5 : %s\n", nome_estacao(5));
+    printf("10 : %s\n", nome_estacao(10));
+
+    // Testando a busca por nodos adjacentes
+    node_list adjacentes;
+    inicializar_lista(&adjacentes);
+    buscar_nodos_adjacentes(nodo3, &adjacentes);
+    apresentar_lista(&adjacentes);
+
     system("pause");
 
     return 0;

@@ -19,7 +19,13 @@ typedef struct {
 
 // Estruturas de Dados
 void inicializar_lista(node_list *lista) ;
-node* adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float travel_time, node *father);
+node* adicionar_nodo(
+    node_list *lista, 
+    const char *name, 
+    float function, 
+    float heuristic, 
+    float travel_time, 
+    node *father);
 void liberar_lista(node_list *lista);
 void apresentar_lista(node_list *lista);
 void remover_nodo(node_list *entrada, node *nodo);
@@ -31,12 +37,13 @@ node* maior_nodo(node_list * lista);
 int eh_nodo_objetivo(node *nodo);
 float calc_heuristica(node* nodo);
 float calc_travel_time(node* nodo);
-void buscar_nodos_adjacentes(nodo* best_node, node_list* lista);
+void buscar_nodos_adjacentes(node *best_node, node_list *lista);
 
 // Funções secundárias auxiliares
 int valid_name(const char *name);
 int numero_estacao(const char *name);
-int testa_matriz_diagonal(float ** matriz, int n, int m);
+int testa_matriz_diagonal(float matriz[14][14]);
+const char* nome_estacao(int i);
 
 // Dados do problema
 float train_speed = 8.33; // Velocidade em m/s (30km/h)

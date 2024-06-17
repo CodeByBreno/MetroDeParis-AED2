@@ -8,7 +8,7 @@ void a_star(){
     inicializar_lista(&visitados);
 
     while(true){
-        node nodoMaior = maiorNodo(fronteira);
+        node * nodoMaior = maior_nodo(&fronteira);
 
         if (ehNodoObjetivo(nodoMaior)){
             return calcDistancia(nodoMaior);
