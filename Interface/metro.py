@@ -163,10 +163,18 @@ def button_function(clicked_circles):
             text=True, 
             check=True
         )
+        print(result.returncode)
         metro_path = result.stdout.split(',')
         print("Saída:", metro_path)
     except subprocess.CalledProcessError as e:
-        print(f"Erro ao executar o arquivo: {e}")
+        if(e.returncode == 19):
+            message = f"Não existe rota entre as estações {args}!"
+            print(message)
+        elif(e.returncode == 20):
+            message = f"Não foi possível encontrar um caminho!"
+            print(message)
+        else:
+            print(f"Erro ao executar o arquivo: {e}")
 
     # Coordenadas específicas para conectar com linhas
     get_coordenadas(metro_path)
