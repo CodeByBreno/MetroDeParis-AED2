@@ -50,6 +50,7 @@ float calc_heuristica(node* nodo);
 float calc_travel_time(node* nodo);
 void buscar_nodos_adjacentes(node *best_node, node_list *lista);
 resposta * gerar_resposta(node *nodo);
+int tem_baldeacao(node * inicio, node * fim);
 
 // Funções secundárias auxiliares
 void printMatriz(float matriz[14][14]);

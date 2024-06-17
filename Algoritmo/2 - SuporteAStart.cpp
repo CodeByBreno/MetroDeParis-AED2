@@ -205,7 +205,22 @@ resposta *gerar_resposta(node *nodo)
 }
 
 int tem_baldeacao(node * inicio, node * fim){
-    if (inicio == NULL || fim == NULL || inicio->father == NULL || fim->father != inicio){
-        
+    if (inicio == NULL || 
+        fim == NULL || 
+        inicio->father == NULL ||
+        fim->father != inicio){
+        return 0;
     }
+
+    int estacao1 = numero_estacao(inicio->father->name);
+    int estacao2 = numero_estacao(inicio->name);
+    int estacao3 = numero_estacao(fim->name);
+
+    int linha1 = linha_metro[estacao1][estacao2];
+    int linha2 = linha_metro[estacao2][estacao3];
+
+    if (linha1 != linha2)
+        return 1;
+    else    
+        return 0;
 }

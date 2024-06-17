@@ -158,9 +158,16 @@ int main()
     printf("Caminho: %s\n", res->caminho);
     printf("Tempo aproximado: %.2f\n", res->tempo_total);
 
+    // Testando baldeacao
+    printf("\nTestando baldeacao: \n");
+    printf("Naum pra ter: %d\n", tem_baldeacao(nodo1, nodo2));
+    printf("Naum pra ter: %d\n", tem_baldeacao(nodo2, nodo3));
+    printf("Eh pra ter: %d\n", tem_baldeacao(nodo2, nodo4));
+
     // Testando o A_Star
-    printf("\n\nTestando A*: \n");
-    resposta * result = a_star();
+    printf("\n------------------------");
+    printf("\nTestando A*: \n");
+    resposta * result = DEBUG_a_star();
 
     // Apresentando a resposta
     printf("\nResposta encontrada: \n");

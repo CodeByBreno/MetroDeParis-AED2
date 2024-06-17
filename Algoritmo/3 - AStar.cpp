@@ -39,10 +39,16 @@ resposta * a_star(){
 
             for(int i = 0; i < adjacentes.size; i++){
                 node * atual = obter_nodo(&adjacentes, i);
-                float heuristic = calc_heuristica(obter_nodo(&adjacentes, i));
-                float time = calc_travel_time(obter_nodo(&adjacentes, i));
+
+                float heuristic = calc_heuristica(atual);
                 atual->heuristic = heuristic;
+
+                float time = calc_travel_time(atual);
+                if (tem_baldeacao(atual->father, atual)){
+                    time += 4;
+                }
                 atual->travel_time = time + atual->father->travel_time;
+                
                 atual->function = atual->heuristic + atual->travel_time;
             }
 
@@ -95,10 +101,17 @@ resposta * DEBUG_a_star(){
 
             for(int i = 0; i < adjacentes.size; i++){
                 node * atual = obter_nodo(&adjacentes, i);
-                float heuristic = calc_heuristica(obter_nodo(&adjacentes, i));
-                float time = calc_travel_time(obter_nodo(&adjacentes, i));
+    
+                float heuristic = calc_heuristica(atual);
                 atual->heuristic = heuristic;
+
+                float time = calc_travel_time(atual);
+                if (tem_baldeacao(atual->father, atual)){
+                    printf("Vindo de %s, Baldeacao de %s para %s\n", atual->father->father->name, atual->father->name, atual->name);
+                    time += 4;
+                }
                 atual->travel_time = time + atual->father->travel_time;
+                
                 atual->function = atual->heuristic + atual->travel_time;
             }
 
