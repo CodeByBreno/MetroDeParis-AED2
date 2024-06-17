@@ -2,7 +2,7 @@
 #define CONFIGURACOES_H
 
 char* initial_station = "E1";
-char* final_station = "E13";
+char* final_station = "E14";
 typedef struct node {
     char* name;          // Nome do nó
     float function;      // Valor da função f(n)
@@ -58,6 +58,7 @@ int valid_name(const char *name);
 int numero_estacao(const char *name);
 int testa_matriz_diagonal(float matriz[14][14]);
 const char* nome_estacao(int i);
+void lancar_erro(char * mensagem, int number);
 
 // Funcoes A*
 resposta * a_star();

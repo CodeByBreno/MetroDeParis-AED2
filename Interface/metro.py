@@ -141,7 +141,7 @@ def get_coordenadas(metro_path):
 # Função a ser chamada quando o botão for clicado
 def button_function(clicked_circles):
     if platform.system() == 'Windows':
-        exe_path = "../Algoritmo/output/Main.exe"
+        exe_path = "./Algoritmo/output/Main.exe"
     elif platform.system() == 'Linux':
         exe_path = "./Algoritmo/output/Main"
     else:
