@@ -1,8 +1,8 @@
 #ifndef CONFIGURACOES_H
 #define CONFIGURACOES_H
 
-char* initial_station = "E3";
-char* final_station = "E4";
+char* initial_station = "E1";
+char* final_station = "E13";
 typedef struct node {
     char* name;          // Nome do nó
     float function;      // Valor da função f(n)
@@ -63,7 +63,7 @@ resposta * a_star();
 resposta * DEBUG_a_star();
 
 // Dados do problema
-float train_speed = 8.33; // Velocidade em m/s (30km/h)
+float train_speed = 30; // Velocidade em km/h
 float change_line_time = 4.0;
 
 float distancia_direta[14][14] = {

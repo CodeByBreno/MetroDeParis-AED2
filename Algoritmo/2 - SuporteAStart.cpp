@@ -53,7 +53,7 @@ float calc_heuristica(node *nodo)
     int numero_estacao_anterior = numero_estacao(estacao_anterior) - 1;
 
     float real_distance = distancia_direta[numero_estacao_atual][numero_estacao_anterior];
-    return real_distance / train_speed;
+    return real_distance / train_speed * 60; // convertendo o resultado de horas para minutos
 }
 
 float calc_travel_time(node *nodo)
@@ -83,7 +83,7 @@ float calc_travel_time(node *nodo)
         exit(12);
     }
 
-    return distance / train_speed;
+    return distance / train_speed * 60; // convertendo o resultado de horas para minutos
 }
 
 void buscar_nodos_adjacentes(node *best_node, node_list *lista)
@@ -186,7 +186,7 @@ resposta *gerar_resposta(node *nodo)
 
     // Imprime os elementos da lista na ordem correta
     for (int i = counter - 1; i >= 0; i--) {
-        printf("%s%s", lista_caminho[i], (i > 0) ? "," : "");
+        //printf("%s%s", lista_caminho[i], (i > 0) ? "," : "");
         strcat(result->caminho, lista_caminho[i]);
         if (i > 0) {
             strcat(result->caminho, ",");
