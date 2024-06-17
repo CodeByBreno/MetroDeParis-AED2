@@ -167,6 +167,8 @@ def button_function(clicked_circles):
     print(args)
 
     metro_path = []
+    global message  
+
     try:
         result = subprocess.run(
             [exe_path] + args, 
@@ -175,15 +177,18 @@ def button_function(clicked_circles):
             check=True
         )
         print(result.returncode)
-        metro_path = result.stdout.split(',')
+        metro_path, time_result = result.stdout.split('\n')
+        metro_path = metro_path.split(',')
         print("Saída:", metro_path)
+
+        message = f"Tempo estimado: {time_result}"
+
     except subprocess.CalledProcessError as e:
-        global message  
         if(e.returncode == 19):
-            message = f"Não existe rota entre as estações {args}!"
+            message = f"Não existe rota entre as estações {args[0]} e {args[1]}."
             print(message)
         elif(e.returncode == 20):
-            message = f"Não foi possível encontrar um caminho!"
+            message = f"Não foi possível encontrar um caminho."
             print(message)
         else:
             print(f"Erro ao executar o arquivo: {e}")

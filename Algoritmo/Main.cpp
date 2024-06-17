@@ -19,7 +19,9 @@ int main(int argc, char *argv[]) {
     final_station = argv[2];
 
     resposta * resultado = a_star();
-    printf("%s", resultado->caminho);
+    printf("%s\n", resultado->caminho);
+    printf("%.2f", resultado->tempo_total);
+    printf(" minutos.");
     
     return 0;
 }
