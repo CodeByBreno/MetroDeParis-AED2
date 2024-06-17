@@ -18,11 +18,8 @@ resposta * a_star(){
     while(limitador++ < 100){
         node * melhorNodo = melhor_nodo(&fronteira);
 
-        if (fronteira.size == 0){
-            printf("Erro: Nao existe rota entre as estacoes\n");
-            system("pause");
-            exit(19);
-        }
+        if (fronteira.size == 0)
+            lancar_erro("Erro: Nao existe rota entre as estacoes\n", 19);
 
         if (contem_nodo(&fronteira, nodo_objetivo)){
             node* objetivo = obter_nodo_pelo_nome(&fronteira, final_station);
@@ -56,9 +53,7 @@ resposta * a_star(){
         }   
     }
 
-    printf("Erro: Nao foi possivel encontrar um caminho\n");
-    system("pause");
-    exit(20);
+    lancar_erro("Erro: Nao foi possivel encontrar um caminho\n", 20);
 }
 
 resposta * DEBUG_a_star(){
@@ -75,14 +70,11 @@ resposta * DEBUG_a_star(){
     while(limitador++ < 10){
         node * melhorNodo = melhor_nodo(&fronteira);
 
-        if (fronteira.size == 0){
-            printf("Erro: Nao existe rota entre as estacoes\n");
-            system("pause");
-            exit(21);
-        }
+        if (fronteira.size == 0)
+            lancar_erro("Erro: Nao existe rota entre as estacoes\n", 21);
 
         printf("\n-------------------------------\n");
-        printf("\nMelhor nodo da rodada: \n");
+        printf("\nMelhor nodo da rodada %d: \n", limitador);
         apresentar_nodo(melhorNodo);
 
         if (contem_nodo(&fronteira, nodo_objetivo)){
@@ -127,7 +119,5 @@ resposta * DEBUG_a_star(){
         }   
     }
 
-    printf("Erro: Nao foi possivel encontrar um caminho\n");
-    system("pause");
-    exit(22);
+    lancar_erro("Erro: Nao foi possivel encontrar um caminho\n", 22);
 }

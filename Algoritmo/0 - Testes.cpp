@@ -167,7 +167,8 @@ int main()
     // Testando o A_Star
     printf("\n------------------------");
     printf("\nTestando A*: \n");
-    resposta * result = DEBUG_a_star();
+    // resposta * result = DEBUG_a_star();
+    resposta * result = a_star();
 
     // Apresentando a resposta
     printf("\nResposta encontrada: \n");

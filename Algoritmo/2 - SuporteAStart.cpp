@@ -37,11 +37,7 @@ int eh_nodo_objetivo(node *nodo)
 float calc_heuristica(node *nodo)
 {
     if (nodo == NULL || nodo->father == NULL)
-    {
-        printf("Erro: A heuristica não pode ser calculada para um nodo sem pai\n");
-        system("pause");
-        exit(10);
-    }
+        lancar_erro("Erro: A heuristica não pode ser calculada para um nodo sem pai\n", 10);
 
     char *estacao_atual = (char *)malloc(sizeof(char) * (strlen(nodo->name) + 1));
     strcpy(estacao_atual, nodo->name);
@@ -59,11 +55,7 @@ float calc_heuristica(node *nodo)
 float calc_travel_time(node *nodo)
 {
     if (nodo == NULL || nodo->father == NULL)
-    {
-        printf("Erro: A heuristica não pode ser calculada para um nodo sem pai");
-        system("pause");
-        exit(11);
-    }
+        lancar_erro("Erro: A heuristica não pode ser calculada para um nodo sem pai\n", 11);
 
     char *estacao_atual = (char *)malloc(sizeof(char) * (strlen(nodo->name) + 1));
     strcpy(estacao_atual, nodo->name);
@@ -77,11 +69,7 @@ float calc_travel_time(node *nodo)
     float distance = distancia_real[numero_estacao_atual][numero_estacao_anterior];
 
     if (distance == 0)
-    {
-        printf("Erro: Nao existe conexao entre essas duas estacoes\n");
-        system("pause");
-        exit(12);
-    }
+        lancar_erro("Erro: Nao existe conexao entre essas duas estacoes\n", 12);
 
     return distance / train_speed * 60; // convertendo o resultado de horas para minutos
 }
@@ -89,11 +77,7 @@ float calc_travel_time(node *nodo)
 void buscar_nodos_adjacentes(node *best_node, node_list *lista)
 {
     if (best_node == NULL || lista == NULL)
-    {
-        printf("Erro: Dados nulos");
-        system("pause");
-        exit(13);
-    }
+        lancar_erro("Erro: Dados nulos\n", 13);
 
     char *estacao = (char *)malloc(sizeof(char) * (strlen(best_node->name) + 1));
     strcpy(estacao, best_node->name);
@@ -134,11 +118,8 @@ void buscar_nodos_adjacentes(node *best_node, node_list *lista)
 
 resposta *gerar_resposta(node *nodo)
 {
-    if (nodo == NULL) {
-        printf("Erro: Nodo nulo");
-        system("pause");
-        exit(14);
-    }
+    if (nodo == NULL) 
+        lancar_erro("Erro: Nodo nulo\n", 14);
 
     // Primeiro passo: determinar o tamanho total necessário
     node *aux = nodo;
@@ -152,15 +133,13 @@ resposta *gerar_resposta(node *nodo)
 
     // Alocar memória para o resultado
     resposta *result = (resposta *)malloc(sizeof(resposta));
-    if (result == NULL) {
-        printf("Erro: Falha ao alocar memória para resultado\n");
-        exit(15);
-    }
+    if (result == NULL)
+        lancar_erro("Erro: Falha ao alocar memória para resultado\n", 15);
+
     result->caminho = (char *)malloc(sizeof(char) * (total_length + 1)); // +1 para o terminador nulo
-    if (result->caminho == NULL) {
-        printf("Erro: Falha ao alocar memória para caminho\n");
-        exit(16);
-    }
+    if (result->caminho == NULL) 
+        lancar_erro("Erro: Falha ao alocar memória para caminho\n", 16);
+
     result->caminho[0] = '\0'; // Inicializa a string vazia
 
     // Segundo passo: preencher a string na ordem correta
@@ -170,15 +149,13 @@ resposta *gerar_resposta(node *nodo)
 
     while (aux != NULL) {
         lista_caminho = (char **)realloc(lista_caminho, sizeof(char*) * (counter + 1));
-        if (lista_caminho == NULL) {
-            printf("Erro: Falha ao realocar lista_caminho\n");
-            exit(17);
-        }
+        if (lista_caminho == NULL) 
+            lancar_erro("Erro: Falha ao realocar lista_caminho\n", 17);
+        
         lista_caminho[counter] = (char *)malloc(sizeof(char) * (strlen(aux->name) + 1));
-        if (lista_caminho[counter] == NULL) {
-            printf("Erro: Falha ao alocar memória para lista_caminho[%d]\n", counter);
-            exit(18);
-        }
+        if (lista_caminho[counter] == NULL) 
+            lancar_erro("Erro: Falha ao alocar memória para lista_caminho\n", 18);
+        
         strcpy(lista_caminho[counter], aux->name);
         counter++;
         aux = aux->father;

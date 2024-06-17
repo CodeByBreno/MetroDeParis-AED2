@@ -39,11 +39,8 @@ int numero_estacao(const char *name)
     const char *validos[] = {"E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14"};
     int c = 0;
 
-    if (valid_name(name) == 0){
-        printf("Erro: Nome da estacao invalido\n");
-        system("pause");
-        exit(23);
-    }
+    if (valid_name(name) == 0)
+        lancar_erro("Erro: Nome da estacao invalido\n", 23);
 
     for (int i = 0; i < 14; i++)
     {
@@ -73,4 +70,10 @@ int testa_matriz_diagonal(float matriz[14][14]){
     }
     printf("Eh simetrica pela diagonal\n");
     return 1;
+}
+
+void lancar_erro(char * mensagem, int number){
+    printf("%s", mensagem);
+    //system("pause");
+    exit(number);
 }

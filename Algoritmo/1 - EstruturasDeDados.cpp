@@ -12,11 +12,7 @@ void inicializar_lista(node_list *lista)
 
 node * create_node(const char *name, float function, float heuristic, float travel_time, node *father){
     node *new_node = (node *)malloc(sizeof(node));
-    if (name == NULL){
-        printf("Erro: Adicionando Nodo com nome nulo\n");
-        system("pause");
-        exit(1);
-    }
+    if (name == NULL) lancar_erro("Erro: Adicionando nodo com nome nulo", 1);
     new_node->name = strdup(name);
     new_node->function = function;
     new_node->heuristic = heuristic;
@@ -29,11 +25,7 @@ node * create_node(const char *name, float function, float heuristic, float trav
 node *adicionar_nodo(node_list *lista, const char *name, float function, float heuristic, float travel_time, node *father)
 {
     node *new_node = (node *)malloc(sizeof(node));
-    if (name == NULL){
-        printf("Erro: Adicionando Nodo com nome nulo\n");
-        system("pause");
-        exit(2);
-    }
+    if (name == NULL) lancar_erro("Erro: Adicionando Nodo com nome nulo\n", 2);
     new_node->name = strdup(name);
     new_node->function = function;
     new_node->heuristic = heuristic;
@@ -61,11 +53,8 @@ node *adicionar_nodo(node_list *lista, const char *name, float function, float h
 }
 
 node * adicionar_nodo_automaticamente(node_list * lista, node * nodo){
-    if (contem_nodo(lista, nodo)){
-        printf("Erro: Nodo ja contido na lista (outro nodo de mesmo nome esta presente)\n");
-        system("pause");
-        exit(3);
-    }
+    if (contem_nodo(lista, nodo))
+        lancar_erro("Erro: Nodo ja contido na lista (outro nodo de mesmo nome esta presente)\n", 3);
 
     node* newNode = adicionar_nodo(lista, nodo->name, nodo->function, nodo->heuristic, nodo->travel_time, nodo->father);
     return newNode;
@@ -88,29 +77,16 @@ void liberar_lista(node_list *lista)
 // Função para remover um nó
 void remover_nodo(node_list *lista, node *nodo)
 {
-    if (lista == NULL)
-    {
-        printf("Erro: Lista Inexistente\n");
-        system("pause");
-        exit(4);
-    }
+    if (lista == NULL) lancar_erro("Erro: Lista Inexistente\n", 4);
 
-    if (lista->head == NULL)
-    {
-        printf("Erro: Lista Vazia\n");
-        system("pause");
-        exit(5);
-    }
+    if (lista->head == NULL) lancar_erro("Erro: Lista Vazia\n", 5);
 
     node* atual = lista->head;
     node* anterior = NULL;
 
     while(atual != nodo){
-        if (atual->father == nodo) {
-            printf("Erro: O nodo nao pode ser removido porque existem outros relacionados a ele\n");
-            system("pause");
-            exit(6);
-        }
+        if (atual->father == nodo) 
+            lancar_erro("Erro: O nodo nao pode ser removido porque existem outros relacionados a ele\n", 6);
         anterior = atual;
         atual = atual->next;
     }
@@ -131,11 +107,7 @@ node *obter_nodo(node_list *lista, int i)
     node *result = lista->head;
 
     if (i >= lista->size)
-    {
-        printf("Erro: Busca por nodo em posição inexistente na lista\n");
-        system("pause");
-        exit(7);
-    }
+        lancar_erro("Erro: Busca por nodo em posição inexistente na lista\n", 7);
 
     while (i > 0)
     {
@@ -167,10 +139,7 @@ void apresentar_lista(node_list *lista)
 void apresentar_nodo(node *nodo)
 {
     if (nodo == NULL)
-    {
-        printf("O nodo é NULL.\n");
-        return;
-    }
+        lancar_erro("O nodo é NULL.\n", 21);
 
     printf("Nome: %s | F(n): %.2f | h(n): %.2f | d(n): %.2f | Father_name: %s\n",
            nodo->name,
@@ -221,11 +190,8 @@ int contem_nodo(node_list * lista, node * nodo){
     }
 
     while(aux != NULL){
-        if (aux->name == NULL){
-            printf("Erro: Nodo com nome nulo\n");
-            system("pause");
-            exit(8);
-        }
+        if (aux->name == NULL)
+            lancar_erro("Erro: Nodo com nome nulo\n", 8);
 
         if (strcmp(aux->name, nodo->name) == 0){
             return 1;
@@ -244,8 +210,6 @@ node * obter_nodo_pelo_nome(node_list * lista, char * nome){
         }
         aux = aux->next;
     }
-    
-    printf("Erro: Busca por nodo com nome inexistente na lista\n");
-    system("pause");
-    exit(9);
+
+    lancar_erro("Erro: Busca por nodo com nome inexistente na lista\n", 9);
 }
