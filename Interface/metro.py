@@ -70,10 +70,10 @@ largura, altura = 800, 600
 screen = pygame.display.set_mode((largura, altura))
 
 # Define o título da janela
-pygame.display.set_caption('Interface com Background')
+pygame.display.set_caption('Problema do metro de Paris com A*')
 
 # Carrega a imagem de fundo
-background = pygame.image.load('metro-map.png')
+background = pygame.image.load('./Interface/metro-map.png')
 
 # Redimensiona a imagem de fundo para caber na janela (opcional)
 background = pygame.transform.scale(background, (largura, altura))
@@ -143,7 +143,7 @@ def button_function(clicked_circles):
     if platform.system() == 'Windows':
         exe_path = "../Algoritmo/output/Main.exe"
     elif platform.system() == 'Linux':
-        exe_path = "./algorithm"
+        exe_path = "./Algoritmo/output/Main"
     else:
         print("Sistema operacional não suportado.")
         # Encerra o programa com um código de erro
