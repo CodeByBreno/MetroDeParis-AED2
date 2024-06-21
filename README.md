@@ -33,6 +33,10 @@ isso provavelmente não deve ocorrer. Apenas para contextualizar, o arquivo pyth
 Talvez pareça um erro que algumas estações "conectadas" na ilustração não tenham uma rota conectando-as. A questão é que, se baseando na guia do projeto, nem sempre
 existe um caminho entre estações conectadas. Isso ocorre porque a rota pode ser de via única, ou seja, há caminho de E1 para E14, porém não há caminho de E14 para E1.
 
+<strong>OBSERVAÇÃO:</strong>
+Caso queira ver os casos de teste, é possivel que seja necessário pausar o cmd. Para permitir que o código faça isso automaticamente, vá no arquivo 4 - Auxiliares.cpp
+e tire o comentário em "system("pause");" na função "lanca_erro()". Vale mencionar que, caso isso seja feito, a interface irá travar sempre que ocorrer um erro.
+
 # 🖼️ Ilustrações do Projeto
 
 <h2><Strong>Interface com um caminho destacado: </Strong></h2>
