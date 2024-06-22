@@ -54,15 +54,20 @@ int numero_estacao(const char *name)
     return c;
 }
 
-const char* nome_estacao(int i) {
-    const char* nomes[] = {"E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14"};
+const char *nome_estacao(int i)
+{
+    const char *nomes[] = {"E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14"};
     return (i >= 1 && i <= 14) ? nomes[i - 1] : NULL;
 }
 
-int testa_matriz_diagonal(float matriz[14][14]){
-    for (int i = 0; i < 14; i++){
-        for(int j = 0; j < 14; j++){
-            if (matriz[i][j] != matriz[j][i]){
+int testa_matriz_diagonal(float matriz[14][14])
+{
+    for (int i = 0; i < 14; i++)
+    {
+        for (int j = 0; j < 14; j++)
+        {
+            if (matriz[i][j] != matriz[j][i])
+            {
                 printf("Nao eh simetrica pela diagonal. Erro em (%d, %d): %.2f\n", i, j, matriz[i][j]);
                 return 0;
             }
@@ -72,8 +77,21 @@ int testa_matriz_diagonal(float matriz[14][14]){
     return 1;
 }
 
-void lancar_erro(char * mensagem, int number){
+void lancar_erro(char *mensagem, int number)
+{
     printf("%s", mensagem);
-    //system("pause");
+    // system("pause");
     exit(number);
+}
+
+int possui(int *vetor, int size, int valor)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (vetor[i] == valor)
+        {
+            return 1;
+        }
+    }
+    return 0;
 }

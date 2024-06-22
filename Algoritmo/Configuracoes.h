@@ -1,15 +1,22 @@
 #ifndef CONFIGURACOES_H
 #define CONFIGURACOES_H
 
-char* initial_station = "E1";
-char* final_station = "E14";
+char* initial_station = "E6"; // estação inicial
+char* final_station = "E13";  // estação final
+
+// Forma como a tabela de distâncias reais entre estações é interpratada
+// 0 -> Origem = Linha e Destino = Coluna
+// 1 -> Origem = Coluna e Destino = Linha
+// 2 -> Ambos os casos são testados. Cuidado! A tabela precisa ser simetrica para funcionar corretamente
+int distancia_real_reading_type = 2; 
+
 typedef struct node {
-    char* name;          // Nome do nó
-    float function;      // Valor da função f(n)
-    float heuristic;     // Valor da heurística h(n)
-    float travel_time;      // Distância g(n)
-    struct node* father; // Ponteiro para o nó pai
-    struct node* next;  // Próximo nodo da lista ligada
+    char* name;            // Nome do nó
+    float function;        // Valor da função f(n)
+    float heuristic;       // Valor da heurística h(n)
+    float travel_time;     // Distância g(n)
+    struct node* father;   // Ponteiro para o nó pai
+    struct node* next;     // Próximo nodo da lista ligada
 } node;
 
 typedef struct {
@@ -59,6 +66,7 @@ int numero_estacao(const char *name);
 int testa_matriz_diagonal(float matriz[14][14]);
 const char* nome_estacao(int i);
 void lancar_erro(char * mensagem, int number);
+int possui(int *vetor, int size, int valor);
 
 // Funcoes A*
 resposta * a_star();

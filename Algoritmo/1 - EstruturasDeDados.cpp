@@ -53,8 +53,10 @@ node *adicionar_nodo(node_list *lista, const char *name, float function, float h
 }
 
 node * adicionar_nodo_automaticamente(node_list * lista, node * nodo){
-    if (contem_nodo(lista, nodo))
-        lancar_erro("Erro: Nodo ja contido na lista (outro nodo de mesmo nome esta presente)\n", 3);
+    if (contem_nodo(lista, nodo)){
+        node * aux = obter_nodo_pelo_nome(lista, nodo->name);
+        return aux;
+    }
 
     node* newNode = adicionar_nodo(lista, nodo->name, nodo->function, nodo->heuristic, nodo->travel_time, nodo->father);
     return newNode;

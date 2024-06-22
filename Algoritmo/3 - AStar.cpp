@@ -49,7 +49,19 @@ resposta * a_star(){
                 atual->function = atual->heuristic + atual->travel_time;
             }
 
-            adicionar_lista(&fronteira, &adjacentes);
+            if (distancia_real_reading_type != 2){
+                adicionar_lista(&fronteira, &adjacentes);
+            }
+
+            // Nesse caso de busca, existe o risco de nodos se repetirem, então é preciso tomar um cuidado adicional ao adicionar nodos
+            if (distancia_real_reading_type == 2){
+                for (int i = 0; i < adjacentes.size; i++){
+                    node * aux = obter_nodo(&adjacentes, i);
+                    if (contem_nodo(&visitados, aux) == 0){
+                        adicionar_nodo_automaticamente(&fronteira, aux);
+                    }
+                }
+            }
         }   
     }
 
@@ -107,7 +119,19 @@ resposta * DEBUG_a_star(){
                 atual->function = atual->heuristic + atual->travel_time;
             }
 
-            adicionar_lista(&fronteira, &adjacentes);
+            if (distancia_real_reading_type != 2){
+                adicionar_lista(&fronteira, &adjacentes);
+            }
+
+            // Nesse caso de busca, existe o risco de nodos se repetirem, então é preciso tomar um cuidado adicional ao adicionar nodos
+            if (distancia_real_reading_type == 2){
+                for (int i = 0; i < adjacentes.size; i++){
+                    node * aux = obter_nodo(&adjacentes, i);
+                    if (contem_nodo(&visitados, aux) == 0){
+                        adicionar_nodo_automaticamente(&fronteira, aux);
+                    }
+                }
+            }
 
             printf("\nAdjacentes a %s: \n", best_node->name);
             apresentar_lista(&adjacentes);
