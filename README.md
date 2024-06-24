@@ -12,6 +12,9 @@ e um outro código em Python, que utiliza a biblioteca PyGame para implementar u
 execução do código em C. Desse modo, o código em Python chama o .exe do arquivo C compilado, passando as estações inicial e final, nos
 argv[] via prompt, e o resultado apresentado na stdout é capturado pelo python e usado para construir o visual.
 
+<strong>Relatório completo do projeto: </strong>
+[Projeto 2 - Algoritmo A estrela para o Metro de Paris.pdf](https://github.com/user-attachments/files/15948620/Projeto.2.-.Algoritmo.A.estrela.para.o.Metro.de.Paris.pdf)
+
 <h2><Strong>Interface do Metro de Paris: </Strong></Strong></h2>
 <p align="center">
   <img src="https://github.com/CodeByBreno/MetroDeParis-AED2/assets/132024181/ffbacc3a-45f4-4d92-b771-2157d56e056b" width="800" alt="analise_algoritmos_ordenacao">
