@@ -1,6 +1,6 @@
 # 🗺️ Cálculo de Rotas do Metro de Paris
-Esse projeto foi desenvolvido para a disciplina de Algoritmo e Estrutura de Dados 2, em equipe, junto à Alan Victor de Souza Pinho, 
-Breno Gabriel de Souza Coelho (eu), Daniel Alencar Penha Carvalho, Mateus Junior de Macedo Cavalcanti, Maic de Oliveira Santo e David Rios.
+Esse projeto foi desenvolvido para a disciplina de Algoritmo e Estrutura de Dados 2, em equipe, junto à Alan Victor de Souza Pinho, Daniel Alencar Penha Carvalho, 
+Mateus Junior de Macedo Cavalcanti, Maic de Oliveira Santo e David Rios.
 Foi produzido no semestre 2023.2, como segundo projeto para disciplina antes mencionada, ministrada pela professora Ana Emília.
 
 O objetivo é, se baseando em um conjunto de especificações do projeto presente no arquivo "ProjetoGrafos.pdf", construir um código
